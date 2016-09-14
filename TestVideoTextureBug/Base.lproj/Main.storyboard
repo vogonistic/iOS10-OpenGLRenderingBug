@@ -18,17 +18,26 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <sceneKitView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" preferredRenderingAPI="2" translatesAutoresizingMaskIntoConstraints="NO" id="DuU-9H-ggA"/>
+                            <sceneKitView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" preferredRenderingAPI="2" translatesAutoresizingMaskIntoConstraints="NO" id="DuU-9H-ggA">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="335" id="shQ-2S-rah"/>
+                                </constraints>
+                            </sceneKitView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="I9Q-at-cex"/>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="DuU-9H-ggA" secondAttribute="bottom" id="BDl-xJ-VFg"/>
+                            <constraint firstItem="I9Q-at-cex" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="F5B-Ma-0wa"/>
                             <constraint firstItem="DuU-9H-ggA" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="SgZ-ph-3dc"/>
+                            <constraint firstItem="I9Q-at-cex" firstAttribute="top" secondItem="DuU-9H-ggA" secondAttribute="bottom" id="b7M-2O-ClJ"/>
+                            <constraint firstAttribute="trailing" secondItem="I9Q-at-cex" secondAttribute="trailing" id="d76-aa-b2I"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="I9Q-at-cex" secondAttribute="bottom" id="fuG-Pp-l5e"/>
                             <constraint firstItem="DuU-9H-ggA" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="j6f-V8-Qtq"/>
                             <constraint firstAttribute="trailing" secondItem="DuU-9H-ggA" secondAttribute="trailing" id="mQx-EG-bUG"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="imageView" destination="I9Q-at-cex" id="261-zp-VyI"/>
                         <outlet property="scnView" destination="DuU-9H-ggA" id="vTw-S6-EPI"/>
                     </connections>
                 </viewController>

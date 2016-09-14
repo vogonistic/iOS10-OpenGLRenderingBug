@@ -12,13 +12,13 @@ import SceneKit
 class ViewController: UIViewController {
 
 	@IBOutlet weak var scnView: SCNView!
-
+	@IBOutlet weak var imageView: UIImageView!
 
 	var playerController: PlayerController!
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		// Do any additional setup after loading the view, typically from a nib.
-		playerController = PlayerController(view: scnView)
+		playerController = PlayerController(view: scnView, display: imageView)
 	}
 
 	override func didReceiveMemoryWarning() {

@@ -24,9 +24,11 @@ class PlayerController: SCNScene {
 	var playerItem: AVPlayerItem?
 	var canvasScene: SKScene!
 	var imageLayer = CALayer()
+	var displayView: UIImageView!
 
-	convenience init(view: SCNView) {
+	convenience init(view: SCNView, display: UIImageView) {
 		self.init()
+		self.displayView = display
 		setUpScene(on: view)
 		setUpVideo()
 	}
@@ -135,8 +137,8 @@ class PlayerController: SCNScene {
 		videoPlayer.play()
 	}
 
+	var i = 0
 	func updateFrame() {
-		print("updateFrame")
 		if let pixelBuffer = currentPixelBuffer() {
 			CVPixelBufferLockBaseAddress(pixelBuffer, CVPixelBufferLockFlags(rawValue: CVOptionFlags(0)));
 
@@ -155,17 +157,26 @@ class PlayerController: SCNScene {
 			// Get a CGImage from the data (the CGImage is used in the drawLayer: delegate method above)
 
 			let bitmapInfo = CGBitmapInfo(rawValue: CGImageAlphaInfo.noneSkipFirst.rawValue)
-			if let currentCGImage = CGImage(width: width,
-			                                height: height,
-			                                bitsPerComponent: 8,
-			                                bitsPerPixel: 32,
-			                                bytesPerRow: 4 * width,
-			                                space: colorSpaceRef, bitmapInfo: [.byteOrder32Big, bitmapInfo],
-			                                provider: pixelWrapper,
-			                                decode: nil,
-			                                shouldInterpolate: false,
-			                                intent: .defaultIntent) {
-				print("has set image for content")
+			if let currentCGImage = CGImage(
+				width: width,
+				height: height,
+				bitsPerComponent: 8,
+				bitsPerPixel: 32,
+				bytesPerRow: 4 * width,
+				space: colorSpaceRef, bitmapInfo: [.byteOrder32Big, bitmapInfo],
+				provider: pixelWrapper,
+				decode: nil,
+				shouldInterpolate: false,
+				intent: .defaultIntent
+				) {
+					print("set image")
+					DispatchQueue.main.async {
+						self.displayView.image = UIImage(cgImage: currentCGImage)
+					}
+				
+				print("h", currentCGImage.height, "w", currentCGImage.width)
+
+
 				self.imageLayer.contents = currentCGImage
 			} else {
 				print("could not got current image")
