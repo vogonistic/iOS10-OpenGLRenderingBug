@@ -95,15 +95,17 @@ class PlayerController: SCNScene {
 
 	private func videoIsReadyToPlay(item: AVPlayerItem, size: CGSize) {
 		// Creates a 2D node that streams the video player output.
-		let videoNode = SKVideoNode(avPlayer: videoPlayer)
-		videoNode.position = CGPoint(x: size.width/2, y: size.height/2)
-		videoNode.size = size
+		let dummyNode = SKShapeNode(rect: CGRect(x: 0.0, y: 0.0, width: 10.0, height: 10.0))
+		dummyNode.fillColor = UIColor.green
+		// let videoNode = SKVideoNode(avPlayer: videoPlayer)
+		dummyNode.position = CGPoint(x: 5.0, y: 5.0)
+		// videoNode.size = size
 
 		// Creates a 2D canvas scene to map it as texture for the sky.
 		canvasScene = SKScene()
 		canvasScene.backgroundColor = UIColor.black
 		canvasScene.size = size
-		canvasScene.addChild(videoNode)
+		canvasScene.addChild(dummyNode)
 
 		let material = SCNMaterial()
 		material.diffuse.contents = canvasScene
