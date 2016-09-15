@@ -14,8 +14,6 @@
 		6F0F4FC41D89C94E001094F5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6F0F4FC21D89C94E001094F5 /* LaunchScreen.storyboard */; };
 		6F0F4FCF1D89C94E001094F5 /* TestVideoTextureBugTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F0F4FCE1D89C94E001094F5 /* TestVideoTextureBugTests.swift */; };
 		6F0F4FDA1D89C94E001094F5 /* TestVideoTextureBugUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F0F4FD91D89C94E001094F5 /* TestVideoTextureBugUITests.swift */; };
-		6F0F4FE81D89C969001094F5 /* PlayerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F0F4FE71D89C969001094F5 /* PlayerController.swift */; };
-		6F0F4FEC1D89EBC8001094F5 /* test.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 6F0F4FEB1D89EBC8001094F5 /* test.mp4 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,8 +47,6 @@
 		6F0F4FD51D89C94E001094F5 /* TestVideoTextureBugUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TestVideoTextureBugUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F0F4FD91D89C94E001094F5 /* TestVideoTextureBugUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestVideoTextureBugUITests.swift; sourceTree = "<group>"; };
 		6F0F4FDB1D89C94E001094F5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		6F0F4FE71D89C969001094F5 /* PlayerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerController.swift; sourceTree = "<group>"; };
-		6F0F4FEB1D89EBC8001094F5 /* test.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = test.mp4; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,8 +99,6 @@
 			children = (
 				6F0F4FB91D89C94E001094F5 /* AppDelegate.swift */,
 				6F0F4FBB1D89C94E001094F5 /* ViewController.swift */,
-				6F0F4FE71D89C969001094F5 /* PlayerController.swift */,
-				6F0F4FEB1D89EBC8001094F5 /* test.mp4 */,
 				6F0F4FBD1D89C94E001094F5 /* Main.storyboard */,
 				6F0F4FC01D89C94E001094F5 /* Assets.xcassets */,
 				6F0F4FC21D89C94E001094F5 /* LaunchScreen.storyboard */,
@@ -242,7 +236,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				6F0F4FC41D89C94E001094F5 /* LaunchScreen.storyboard in Resources */,
-				6F0F4FEC1D89EBC8001094F5 /* test.mp4 in Resources */,
 				6F0F4FC11D89C94E001094F5 /* Assets.xcassets in Resources */,
 				6F0F4FBF1D89C94E001094F5 /* Main.storyboard in Resources */,
 			);
@@ -271,7 +264,6 @@
 			files = (
 				6F0F4FBC1D89C94E001094F5 /* ViewController.swift in Sources */,
 				6F0F4FBA1D89C94E001094F5 /* AppDelegate.swift in Sources */,
-				6F0F4FE81D89C969001094F5 /* PlayerController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -425,6 +417,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = GP78T2GNXD;
 				INFOPLIST_FILE = TestVideoTextureBug/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.test.openglbug;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -438,6 +431,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = GP78T2GNXD;
 				INFOPLIST_FILE = TestVideoTextureBug/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.test.openglbug;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -522,6 +516,7 @@
 				6F0F4FE01D89C94E001094F5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		6F0F4FE11D89C94E001094F5 /* Build configuration list for PBXNativeTarget "TestVideoTextureBugTests" */ = {
 			isa = XCConfigurationList;
@@ -530,6 +525,7 @@
 				6F0F4FE31D89C94E001094F5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		6F0F4FE41D89C94E001094F5 /* Build configuration list for PBXNativeTarget "TestVideoTextureBugUITests" */ = {
 			isa = XCConfigurationList;
@@ -538,6 +534,7 @@
 				6F0F4FE61D89C94E001094F5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
