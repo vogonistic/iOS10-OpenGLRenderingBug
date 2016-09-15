@@ -10,7 +10,6 @@ import Foundation
 import UIKit
 
 import SceneKit
-import SpriteKit
 import AVFoundation
 import CoreGraphics
 
@@ -22,26 +21,18 @@ class PlayerController: SCNScene {
 	var videoPlayer: AVPlayer!
 	var videoOutput: AVPlayerItemVideoOutput!
 	var playerItem: AVPlayerItem?
-	var canvasScene: SKScene!
 	var imageLayer: CALayer!
+	var colorSpaceRef = CGColorSpaceCreateDeviceRGB()
 
-	var displayView: UIImageView!
-	var caDisplay: UIView!
-
-	convenience init(view: SCNView, display: UIImageView, caDisplay: UIView) {
+	convenience init(view: SCNView) {
 		self.init()
-		self.displayView = display
-		self.caDisplay = caDisplay
 		imageLayer = CALayer()
-		imageLayer.frame = CGRect(x: 0, y: 0, width: 2048, height: 2048)
 
-		caDisplay.layer.insertSublayer(imageLayer, at: 0)
 		setUpScene(on: view)
 		setUpVideo()
 	}
 
 	private func setUpScene(on view: SCNView) {
-		//scnView = SCNView(frame: view.bounds, options: [SCNView.Option.preferredRenderingAPI.rawValue: SCNRenderingAPI.openGLES2])
 		scnView = view
 		scnView.frame = view.bounds
 		scnView.showsStatistics = true
@@ -126,12 +117,11 @@ class PlayerController: SCNScene {
 	}
 
 	private func videoIsReadyToPlay(item: AVPlayerItem, size: CGSize) {
-		print("videoIsReadyToPlay")
+		self.imageLayer.frame = CGRect(x: 0.0, y: 0.0, width: size.width, height: size.height)
 		self.mainNode.geometry?.firstMaterial?.diffuse.contents = self.imageLayer
 		videoPlayer.play()
 	}
 
-	var i = 0
 	func updateFrame() {
 		if let pixelBuffer = currentPixelBuffer() {
 			CVPixelBufferLockBaseAddress(pixelBuffer, CVPixelBufferLockFlags(rawValue: CVOptionFlags(0)));
@@ -144,9 +134,6 @@ class PlayerController: SCNScene {
 				// print("releaseData")
 				return
 			})!
-
-			// Get a color-space ref... can't this be done only once?
-			let colorSpaceRef = CGColorSpaceCreateDeviceRGB()
 
 			// Get a CGImage from the data (the CGImage is used in the drawLayer: delegate method above)
 
@@ -164,13 +151,7 @@ class PlayerController: SCNScene {
 				intent: .defaultIntent
 				) {
 
-				// self.mainNode.geometry?.firstMaterial?.diffuse.contents = currentCGImage
-				// self.imageLayer.contents = currentCGImage
-				DispatchQueue.main.async {
-					self.displayView.image = UIImage(cgImage: currentCGImage)
-
-					self.imageLayer.contents = currentCGImage
-				}
+				self.imageLayer.contents = currentCGImage
 
 			} else {
 				print("could not get current image")
@@ -190,6 +171,8 @@ class PlayerController: SCNScene {
 
 extension PlayerController: SCNSceneRendererDelegate {
 	func renderer(_ renderer: SCNSceneRenderer, willRenderScene scene: SCNScene, atTime time: TimeInterval) {
-		updateFrame()
+		DispatchQueue.main.async {
+			self.updateFrame()
+		}
 	}
 }
