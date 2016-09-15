@@ -13,12 +13,15 @@ class ViewController: UIViewController {
 
 	@IBOutlet weak var scnView: SCNView!
 	@IBOutlet weak var imageView: UIImageView!
+	@IBOutlet weak var caView: UIView!
+
+
 
 	var playerController: PlayerController!
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		// Do any additional setup after loading the view, typically from a nib.
-		playerController = PlayerController(view: scnView, display: imageView)
+		playerController = PlayerController(view: scnView, display: imageView, caDisplay: caView)
 	}
 
 	override func didReceiveMemoryWarning() {

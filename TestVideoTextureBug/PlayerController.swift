@@ -23,12 +23,19 @@ class PlayerController: SCNScene {
 	var videoOutput: AVPlayerItemVideoOutput!
 	var playerItem: AVPlayerItem?
 	var canvasScene: SKScene!
-	var imageLayer = CALayer()
-	var displayView: UIImageView!
+	var imageLayer: CALayer!
 
-	convenience init(view: SCNView, display: UIImageView) {
+	var displayView: UIImageView!
+	var caDisplay: UIView!
+
+	convenience init(view: SCNView, display: UIImageView, caDisplay: UIView) {
 		self.init()
 		self.displayView = display
+		self.caDisplay = caDisplay
+		imageLayer = CALayer()
+		imageLayer.frame = CGRect(x: 0, y: 0, width: 2048, height: 2048)
+
+		caDisplay.layer.insertSublayer(imageLayer, at: 0)
 		setUpScene(on: view)
 		setUpVideo()
 	}
@@ -57,7 +64,7 @@ class PlayerController: SCNScene {
 
 		mainNode = SCNNode()
 		mainNode.geometry = SCNBox(width: 5.0, height: 5.0, length: 5.0, chamferRadius: 0.0)
-		mainNode.geometry?.firstMaterial?.diffuse.contents = UIColor.black
+		mainNode.geometry?.firstMaterial?.diffuse.contents = UIColor.blue
 		rootNode.addChildNode(mainNode)
 	}
 
@@ -119,21 +126,8 @@ class PlayerController: SCNScene {
 	}
 
 	private func videoIsReadyToPlay(item: AVPlayerItem, size: CGSize) {
-		// Creates a 2D node that streams the video player output.
-		/*let videoNode = SKVideoNode(avPlayer: videoPlayer)
-		videoNode.position = CGPoint(x: size.width/2, y: size.height/2)
-		videoNode.size = size
-
-		// Creates a 2D canvas scene to map it as texture for the sky.
-		canvasScene = SKScene()
-		canvasScene.backgroundColor = UIColor.black
-		canvasScene.size = size
-		canvasScene.addChild(videoNode)*/
-
-		let material = SCNMaterial()
-		material.diffuse.contents = imageLayer
-		mainNode.geometry?.materials = [ material ]
-
+		print("videoIsReadyToPlay")
+		self.mainNode.geometry?.firstMaterial?.diffuse.contents = self.imageLayer
 		videoPlayer.play()
 	}
 
@@ -169,17 +163,17 @@ class PlayerController: SCNScene {
 				shouldInterpolate: false,
 				intent: .defaultIntent
 				) {
-					print("set image")
-					DispatchQueue.main.async {
-						self.displayView.image = UIImage(cgImage: currentCGImage)
-					}
-				
-				print("h", currentCGImage.height, "w", currentCGImage.width)
 
+				// self.mainNode.geometry?.firstMaterial?.diffuse.contents = currentCGImage
+				// self.imageLayer.contents = currentCGImage
+				DispatchQueue.main.async {
+					self.displayView.image = UIImage(cgImage: currentCGImage)
 
-				self.imageLayer.contents = currentCGImage
+					self.imageLayer.contents = currentCGImage
+				}
+
 			} else {
-				print("could not got current image")
+				print("could not get current image")
 			}
 
 			// Clean up

@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -23,20 +24,40 @@
                                     <constraint firstAttribute="height" constant="335" id="shQ-2S-rah"/>
                                 </constraints>
                             </sceneKitView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="I9Q-at-cex"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cfu-VY-arX">
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="I9Q-at-cex"/>
+                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="73o-cd-Gjd">
+                                        <frame key="frameInset" minX="196" width="180" height="332"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="I9Q-at-cex" secondAttribute="bottom" id="0yv-rB-vfC"/>
+                                    <constraint firstAttribute="bottom" secondItem="73o-cd-Gjd" secondAttribute="bottom" id="49S-UP-Wqv"/>
+                                    <constraint firstItem="I9Q-at-cex" firstAttribute="width" secondItem="cfu-VY-arX" secondAttribute="width" multiplier="0.5" id="DFS-op-69a"/>
+                                    <constraint firstItem="I9Q-at-cex" firstAttribute="top" secondItem="cfu-VY-arX" secondAttribute="top" id="G2a-vL-hNo"/>
+                                    <constraint firstAttribute="trailing" secondItem="73o-cd-Gjd" secondAttribute="trailing" id="MjS-7d-O7l"/>
+                                    <constraint firstItem="73o-cd-Gjd" firstAttribute="top" secondItem="cfu-VY-arX" secondAttribute="top" id="PMR-WA-IiK"/>
+                                    <constraint firstItem="73o-cd-Gjd" firstAttribute="leading" secondItem="I9Q-at-cex" secondAttribute="trailing" id="RvQ-73-n8u"/>
+                                    <constraint firstItem="I9Q-at-cex" firstAttribute="leading" secondItem="cfu-VY-arX" secondAttribute="leading" id="ibP-vI-Xxs"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="I9Q-at-cex" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="F5B-Ma-0wa"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="cfu-VY-arX" secondAttribute="bottom" id="0R7-0r-XjO"/>
+                            <constraint firstItem="cfu-VY-arX" firstAttribute="top" secondItem="DuU-9H-ggA" secondAttribute="bottom" id="4g9-zu-r0E"/>
                             <constraint firstItem="DuU-9H-ggA" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="SgZ-ph-3dc"/>
-                            <constraint firstItem="I9Q-at-cex" firstAttribute="top" secondItem="DuU-9H-ggA" secondAttribute="bottom" id="b7M-2O-ClJ"/>
-                            <constraint firstAttribute="trailing" secondItem="I9Q-at-cex" secondAttribute="trailing" id="d76-aa-b2I"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="I9Q-at-cex" secondAttribute="bottom" id="fuG-Pp-l5e"/>
+                            <constraint firstAttribute="trailing" secondItem="cfu-VY-arX" secondAttribute="trailing" id="aCC-yU-Wcz"/>
                             <constraint firstItem="DuU-9H-ggA" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="j6f-V8-Qtq"/>
                             <constraint firstAttribute="trailing" secondItem="DuU-9H-ggA" secondAttribute="trailing" id="mQx-EG-bUG"/>
+                            <constraint firstItem="cfu-VY-arX" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="owr-Ow-hRd"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="caView" destination="73o-cd-Gjd" id="Wot-Zl-048"/>
                         <outlet property="imageView" destination="I9Q-at-cex" id="261-zp-VyI"/>
                         <outlet property="scnView" destination="DuU-9H-ggA" id="vTw-S6-EPI"/>
                     </connections>
