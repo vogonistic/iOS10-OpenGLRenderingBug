@@ -10,7 +10,6 @@ import Foundation
 import UIKit
 
 import SceneKit
-import SpriteKit
 import AVFoundation
 import CoreGraphics
 
@@ -20,10 +19,8 @@ class PlayerController: SCNScene {
 	var scnScene: SCNScene!
 	var mainNode: SCNNode!
 	var videoPlayer: AVPlayer!
-	var videoOutput: AVPlayerItemVideoOutput!
 	var playerItem: AVPlayerItem?
-	var canvasScene: SKScene!
-	var imageLayer: CALayer!
+	var videoLayer: AVPlayerLayer!
 
 	var displayView: UIImageView!
 	var caDisplay: UIView!
@@ -32,10 +29,7 @@ class PlayerController: SCNScene {
 		self.init()
 		self.displayView = display
 		self.caDisplay = caDisplay
-		imageLayer = CALayer()
-		imageLayer.frame = CGRect(x: 0, y: 0, width: 2048, height: 2048)
 
-		caDisplay.layer.insertSublayer(imageLayer, at: 0)
 		setUpScene(on: view)
 		setUpVideo()
 	}
@@ -86,13 +80,11 @@ class PlayerController: SCNScene {
 		)
 		videoPlayer = AVPlayer(playerItem: item)
 
-		let pixelBufferAttributes = [
-			kCVPixelBufferPixelFormatTypeKey as String : NSNumber(value: kCVPixelFormatType_32ARGB),
-			kCVPixelBufferCGImageCompatibilityKey as String: true,
-			kCVPixelBufferOpenGLESCompatibilityKey as String: true
-		]
-		videoOutput = AVPlayerItemVideoOutput(pixelBufferAttributes: pixelBufferAttributes)
-		item.add(videoOutput)
+		videoLayer = AVPlayerLayer(player: videoPlayer)
+
+		DispatchQueue.main.async {
+			self.caDisplay.layer.insertSublayer(self.videoLayer, at: 0)
+		}
 
 		playerItem = item
 	}
@@ -115,70 +107,10 @@ class PlayerController: SCNScene {
 		}
 	}
 
-	func currentPixelBuffer() -> CVPixelBuffer? {
-		guard let playerItem = playerItem, playerItem.status == .readyToPlay else {
-			print("no pixel buffer")
-			return nil
-		}
-
-		let currentTime = playerItem.currentTime()
-		return videoOutput.copyPixelBuffer(forItemTime: currentTime, itemTimeForDisplay: nil)
-	}
-
 	private func videoIsReadyToPlay(item: AVPlayerItem, size: CGSize) {
 		print("videoIsReadyToPlay")
-		self.mainNode.geometry?.firstMaterial?.diffuse.contents = self.imageLayer
+		// self.mainNode.geometry?.firstMaterial?.diffuse.contents = self.imageLayer
 		videoPlayer.play()
-	}
-
-	var i = 0
-	func updateFrame() {
-		if let pixelBuffer = currentPixelBuffer() {
-			CVPixelBufferLockBaseAddress(pixelBuffer, CVPixelBufferLockFlags(rawValue: CVOptionFlags(0)));
-
-			let width = CVPixelBufferGetWidth(pixelBuffer)
-			let height = CVPixelBufferGetHeight(pixelBuffer)
-			let pixels = CVPixelBufferGetBaseAddress(pixelBuffer)!
-
-			let pixelWrapper = CGDataProvider(dataInfo: nil, data: pixels, size: CVPixelBufferGetDataSize(pixelBuffer), releaseData: { _, _, _ in
-				// print("releaseData")
-				return
-			})!
-
-			// Get a color-space ref... can't this be done only once?
-			let colorSpaceRef = CGColorSpaceCreateDeviceRGB()
-
-			// Get a CGImage from the data (the CGImage is used in the drawLayer: delegate method above)
-
-			let bitmapInfo = CGBitmapInfo(rawValue: CGImageAlphaInfo.noneSkipFirst.rawValue)
-			if let currentCGImage = CGImage(
-				width: width,
-				height: height,
-				bitsPerComponent: 8,
-				bitsPerPixel: 32,
-				bytesPerRow: 4 * width,
-				space: colorSpaceRef, bitmapInfo: [.byteOrder32Big, bitmapInfo],
-				provider: pixelWrapper,
-				decode: nil,
-				shouldInterpolate: false,
-				intent: .defaultIntent
-				) {
-
-				// self.mainNode.geometry?.firstMaterial?.diffuse.contents = currentCGImage
-				// self.imageLayer.contents = currentCGImage
-				DispatchQueue.main.async {
-					self.displayView.image = UIImage(cgImage: currentCGImage)
-
-					self.imageLayer.contents = currentCGImage
-				}
-
-			} else {
-				print("could not get current image")
-			}
-
-			// Clean up
-			CVPixelBufferUnlockBaseAddress(pixelBuffer, CVPixelBufferLockFlags(rawValue: CVOptionFlags(0)))
-		}
 	}
 
 
@@ -190,6 +122,6 @@ class PlayerController: SCNScene {
 
 extension PlayerController: SCNSceneRendererDelegate {
 	func renderer(_ renderer: SCNSceneRenderer, willRenderScene scene: SCNScene, atTime time: TimeInterval) {
-		updateFrame()
+		// updateFrame()
 	}
 }
