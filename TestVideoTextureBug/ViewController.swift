@@ -30,6 +30,7 @@ class ViewController: UIViewController {
 		cameraNode.camera = SCNCamera()
 		cameraNode.position = SCNVector3(x: 0.0, y: 0.0, z: 25.0)
 		scnScene.rootNode.addChildNode(cameraNode)
+        scnScene.background.contents = UIColor.lightGray
 
 		let cubeNode = SCNNode()
 		cubeNode.geometry = SCNBox(width: 5.0, height: 5.0, length: 5.0, chamferRadius: 0.0)
@@ -37,15 +38,25 @@ class ViewController: UIViewController {
 
 		// setup SpriteKit Scene
 		let skScene = SKScene()
-		skScene.backgroundColor = UIColor.black
-		skScene.size = CGSize(width: 100, height: 100)
+		skScene.backgroundColor = UIColor.green
+		skScene.size = CGSize(width: 480, height: 360)
 
-		let skNode = SKShapeNode(rect: CGRect(x: 0.0, y: 0.0, width: 10.0, height: 10.0))
-		skNode.fillColor = UIColor.green
-		skNode.position = CGPoint(x: 5.0, y: 5.0)
-		skScene.addChild(skNode)
+        let videoNode = SKVideoNode(url: URL(string: "http://devimages.apple.com/iphone/samples/bipbop/bipbopall.m3u8")!)
+        videoNode.yScale = -1
+        videoNode.size = CGSize(width: 480, height: 360)
+        videoNode.position = CGPoint(x: 240, y: 180)
+        skScene.addChild(videoNode)
 
 		cubeNode.geometry?.firstMaterial?.diffuse.contents = skScene
+
+        let cubeRotation = CABasicAnimation(keyPath: "transform")
+        cubeRotation.toValue = NSValue(scnMatrix4: SCNMatrix4Rotate(cubeNode.transform, Float.pi, 1, 1, 0))
+        cubeRotation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
+        cubeRotation.repeatCount = Float.greatestFiniteMagnitude
+        cubeRotation.duration = 5.0
+        cubeNode.addAnimation(cubeRotation, forKey: "RotateCube")
+
+        videoNode.play()
 	}
 }
 

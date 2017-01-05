@@ -193,7 +193,7 @@
 				TargetAttributes = {
 					6F0F4FB51D89C94E001094F5 = {
 						CreatedOnToolsVersion = 8.0;
-						DevelopmentTeam = GP78T2GNXD;
+						DevelopmentTeam = Y35BNSESLL;
 						ProvisioningStyle = Automatic;
 					};
 					6F0F4FC91D89C94E001094F5 = {
@@ -415,11 +415,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = GP78T2GNXD;
+				DEVELOPMENT_TEAM = Y35BNSESLL;
 				INFOPLIST_FILE = TestVideoTextureBug/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.test.openglbug;
+				PRODUCT_BUNDLE_IDENTIFIER = com.vogonistic.test.openglbug;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -429,11 +429,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = GP78T2GNXD;
+				DEVELOPMENT_TEAM = Y35BNSESLL;
 				INFOPLIST_FILE = TestVideoTextureBug/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.test.openglbug;
+				PRODUCT_BUNDLE_IDENTIFIER = com.vogonistic.test.openglbug;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
