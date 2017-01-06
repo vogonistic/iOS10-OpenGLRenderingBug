@@ -1,11 +1,13 @@
-# Failed to create IOSurface image (texture) - iOS 10 - can't use Sprite Kit in Scene Kit when using openGL
+# iOS 10 - can't use Sprite Kit in Scene Kit when using openGL
 
-This repo reproduces a bug.
+This repo reproduces a bug
+
 ### Hardware
-tested on iPhone 6, running ios10.0.0
+ - iPhone 7 plus, running iOS 10
+ - iPad Air 2, running iOS 10
 
 ### Issue
-using openGL (instead of Metal) for rendering a Scene Kit scene doesn't work when the material is a Sprite Kit scene as input. This works with Metal
+Using openGL (instead of Metal) for rendering a Scene Kit scene doesn't work when the material is a Sprite Kit scene as input. This works with Metal
 
 ### Reproduction
 - run on a real device
